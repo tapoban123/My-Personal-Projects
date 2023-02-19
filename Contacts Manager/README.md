@@ -1,6 +1,6 @@
 # Contacts Manager 
 
-This is a application that helps us to access and manipulate contacts saved in its database.
+This is an application that helps us to access and manipulate contacts saved in its database.
 We can,
 * Add
 * Edit
