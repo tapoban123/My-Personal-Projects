@@ -13,4 +13,4 @@ the contacts using this system.
 * **Please download the required modules for running the program(Only one module needs to be downloaded externally, other modules/libraries are in-built in python)**
 
 ### Note: You may download the Pillow module using the following command in the command prompt, 
-*pip install pillow*
+*pip install Pillow*
