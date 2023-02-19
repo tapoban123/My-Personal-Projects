@@ -1,16 +1,21 @@
+# IMPORTING THE REQUIRED MODULES/LIBRARIES 
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
+from PIL import Image, ImageTk
 
 
-
+# CREATING THE FIRST WINDOW AND SETTING ITS PROPERTIES
 root = Tk()
-root.geometry('800x700')
+root.geometry('1200x620')
 root.title('Contact Manager')
 
+# CREATING AND CONNECTING TO THE DATABASE 
 conn = sqlite3.connect("Contacts_Mng.db")
 cursor = conn.cursor()
+
+# CREATING THE TABLE ‘CONTACTS’
 cursor.execute(
     '''CREATE TABLE IF NOT EXISTS CONTACT_RECS
     (
@@ -22,11 +27,12 @@ cursor.execute(
     );
 ''')
 
-
+# CLASS CONTAINING ALL THE CODE SEGMENTS USED MORE THAN ONE TIME 
 class Codes_Used_Multiple_Times:
     def __init__(self):
         pass
 
+    # DEFINING THE TREEVIEW TO DISPLAY THE CONTACTS IN TABULAR FORM
     def Contacts_Treeview(self,frame,mode,records,height=7):
         global contacts_tree
 
@@ -76,6 +82,7 @@ class Codes_Used_Multiple_Times:
 
         contacts_tree.pack()
 
+    # DEFINING THE SECOND FRAME USED IN THE EDIT SCREEN
     def Edit_Frame2_UI(self,First_Edit):
         global ent_edit
         global edit_btn_close
@@ -118,6 +125,7 @@ class Codes_Used_Multiple_Times:
         edit_btn_close.place(x=25,y=170)
         edit_btn_edit.place(x=420,y=170)
 
+    # CREATING THE USER INTERFACE OF THE EDIT SCREEN
     def Edit_Contact_UI(self,*VALUES):
         global rec
         global lbl_heading_selectedcon
@@ -191,6 +199,7 @@ class Codes_Used_Multiple_Times:
 
         btn_update.place(x=25,y=260)
 
+    # CREATING THE DELETE FUNCTION 
     def Del_Contact_Process(self):
         for contact in contacts_to_del:
             contacts_tree.delete(contact)
@@ -202,7 +211,7 @@ class Codes_Used_Multiple_Times:
 
             con_index += 1
 
-        messagebox.showinfo('Contact Deleted',"The selected contact(s) have been deleted",parent=top_delete)
+        messagebox.showinfo('Contact Deleted',"The selected contact(s) has been deleted",parent=top_delete)
 
         cursor.execute('SELECT * FROM CONTACT_RECS;')
         ALL_CONTACTS_NEW = cursor.fetchall()
@@ -214,10 +223,10 @@ class Codes_Used_Multiple_Times:
 
             NEW_ID += 1
 
-
+# CREATING A CLASS INSTANCE
 Class_Instance = Codes_Used_Multiple_Times()
 
-
+# CREATING THE INTERFACE OF THE MAIN SCREEN 
 def first_UI_scr():
     global top
 
@@ -238,6 +247,7 @@ def first_UI_scr():
     Button(top,text='Exit',font=('Malgun Gothic Bold',18),padx=296,pady=5,borderwidth=5,command=lambda:root.destroy(),bg='#F0EAD6').place(x=20,y=300)
 
 
+# FUNCTION TO INSERT THE CONTACT INTO THE DATABASE
 def add_details_to_db():
     if len(entry_fname.get()) == len(entry_lname.get()) == len(entry_phno.get()) == len(entry_address.get()) == 0:
         messagebox.showerror('Unfilled Contact Details',"You need to fill up the details first and then press 'Enter' or 'OK'",parent=top_add)
@@ -255,10 +265,8 @@ def add_details_to_db():
             entry_list_values = {}
 
             for entry in entry_list:
-                if len(entry.get()) == 0:
-                    entry_list_values[entry] = 'NULL'
-                else:
-                    entry_list_values[entry] = entry.get().strip()
+                value = entry.get().strip() if len(entry.get().strip()) > 0 else 'NULL'
+                entry_list_values[entry] = value
 
             cursor.execute(f"INSERT INTO CONTACT_RECS VALUES({len(NO_OF_RECS)+1},'{entry_list_values[entry_fname]}','{entry_list_values[entry_lname]}',{entry_list_values[entry_phno]},'{entry_list_values[entry_address]}');")
             conn.commit()
@@ -275,6 +283,7 @@ def add_details_to_db():
             messagebox.showerror('Invalid Data',"Please re-check the details you entered and then try again.",parent=top_add)
 
 
+# CREATING THE USER INTERFACE OF THE 'ADD CONTACT' SCREEN
 def  fill_details():
     global top_add
     global entry_fname
@@ -313,6 +322,7 @@ def  fill_details():
     Button(top_add,text='OK',font=('Malgun Gothic Bold',18),padx=143,pady=10,borderwidth=5,bg='#EEE8AA',command=add_details_to_db).place(x=390,y=300)
 
 
+# FUNCTION TO DELETE THE SELECTED CONTACT(S)
 def del_selected_contact():
     global contacts_to_del
 
@@ -330,7 +340,7 @@ def del_selected_contact():
     elif len(contacts_to_del) == 0:
         messagebox.showinfo('No Contact Selected',"You need to select the contact(s) you want to delete and then click the button.",parent=top_delete)
 
-
+# USER INTERFACE OF THE 'DELETE CONTACT' SCREEN
 def delete_rec():
     global top_delete
 
@@ -358,6 +368,7 @@ def delete_rec():
         messagebox.showinfo('Contact ID(s) Updated','Contact ID(s) have been updated',parent=top_delete)
 
 
+# FUNCTION TO UPDATE THE SELECTED CONTACT BY THE NEW DATA
 def Update_with_new(con_ID):
     try:
         cursor.execute(f'''UPDATE CONTACT_RECS SET 
@@ -394,6 +405,7 @@ def Update_with_new(con_ID):
         messagebox.showerror("Invalid Data","Please check the data you entered and then try again.",parent=top_edit)
 
 
+# USER INTERFACE OF THE CONTACT TO BE EDITED IS BEING CREATED
 def edit_specific_contact():
     global rec
 
@@ -415,7 +427,7 @@ def edit_specific_contact():
     else:
         messagebox.showinfo('No Specific Contact Selected',"Please select a specific contact or enter the 'Contact ID' of the contact you want to edit and then click on 'Edit'.",parent=top_edit)
 
-
+# USER INTERFACE OF THE EDIT SCREEN IS BEING CREATED
 def edit_rec():
     global top_edit
     global edit_frame2
@@ -445,7 +457,7 @@ def edit_rec():
 
         Class_Instance.Contacts_Treeview(edit_frame,'browse',EDIT_RECS,5)
 
-
+# FUNCTION TO SEARCH CONTACTS AND DISPLAY THE SEARCH RESULTS
 def search_contact():
     try:
         if len(search_fname.get()) > 0 and (len(search_lname.get()) == len(search_phno.get()) == 0):
@@ -571,7 +583,7 @@ def search_contact():
     except:
         messagebox.showwarning('Wrong Search Details',"No Contact found by the search details you entered",parent=top_view_all)
 
-
+# FUNCITON TO DISPLAY ALL THE CONTACTS 
 def view_all():
     global search_fname
     global search_lname
@@ -621,10 +633,17 @@ def view_all():
 
         Class_Instance.Contacts_Treeview(frame1,'none',CONTACTS)
 
+# OPENING AND RESIZING THE IMAGE THAT HAS BEEN PUT UP ON THE STARTING SCREEN
+img = Image.open('CS Project PNG File.png')
+img_size = img.resize((1200,640))
+photo = ImageTk.PhotoImage(img_size)
 
+# THE TOPIC OF THE PROJECT DISPLAYED AT THE BEGINNING(THE IMAGE HAS BEEN USED IN ITS PLACE)
 text1 = "Contact Manager \n\n\n\n\n\n\nClick Anywhere to Continue"
 
-myButton_begin = Button(root,text=text1,font=('Calibri',35),bg='#BF94E4',padx=600,pady=600,command=first_UI_scr)
+# BUTTON TO OPEN THE MAIN SCREEN
+myButton_begin = Button(root,image=photo,font=('Calibri',35),bg='#BF94E4',padx=600,pady=600,command=first_UI_scr)
 myButton_begin.pack()
 
+# THE CONSTANT LOOP THAT RUNS THE WHOLE PROGRAM IS BEING INITIALIZED
 root.mainloop()
