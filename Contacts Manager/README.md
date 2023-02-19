@@ -5,7 +5,7 @@ We can,
 * Add
 * Edit
 * Delete
-* View 
+* View </br>
 the contacts using this system.
 
 ## You may get errors if -
