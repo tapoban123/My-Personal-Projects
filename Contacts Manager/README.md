@@ -5,8 +5,7 @@ We can,
 * Add
 * Edit
 * Delete
-* View the contacts in tabular form\
-the contacts using this system.
+* View the contacts in tabular form
 
 ## To avoid errors, please do the following -
 * **Please download the .png file provided along with the .py file and save both the files in the same folder/directory.**
