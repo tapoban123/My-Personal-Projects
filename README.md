@@ -1,4 +1,4 @@
-# My personal projects using Python Programming Language has been uploaded here
+# My personal projects using Python Programming Language has been uploaded in this repository
 
 You may access any particular project directory or clone the entire respository 
 
