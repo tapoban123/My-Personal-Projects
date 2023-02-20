@@ -1,6 +1,6 @@
 # Hotel Management System 
 
-This is an application that helps us to save the record of each guest arriving in a hotel. 
+This is an application that helps us to save the record of each guest arriving in a hotel.\ 
 We can, 
 * Add
 * Edit
@@ -14,8 +14,8 @@ It helps in keeping record of the following informations of each guest,
 * Address,
 * Date of Arrival,
 * Time of
-    - Check-in
-    - Check-out
+    * Check-in
+    * Check-out
 * Vehicle Number(in case there is a vehicle with the guest)
 * Room Number provided to guest
 
