@@ -11,5 +11,5 @@ We can,
 * **Please download the .png file provided along with the .py file and save both the files in the same folder/directory.**
 * **Please download the required modules for running the program(Only one module needs to be downloaded externally, other modules/libraries are in-built in python)**
 
-### Note: You may download the Pillow module using the following command in the command prompt, 
+### NOTE: You may download the Pillow module using the following command in the command prompt, 
 *pip install Pillow*
