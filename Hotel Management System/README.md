@@ -1,6 +1,7 @@
 # Hotel Management System 
 
 This is an application that helps us to save the record of each guest arriving in a hotel.  return
+
 We can, 
 * Add
 * Edit
