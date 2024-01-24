@@ -11,7 +11,7 @@ root = tkGUI.Tk()
 root.title("Hotel Management System")
 root.geometry('1200x780')
 myfont = font.Font(size=20)
-conn = sqlite3.connect("Hotel_Management_DB.db")
+conn = sqlite3.connect(r"Hotel Management System\data\Hotel_Management_DB.db")
 cursor = sqlite3.Cursor(conn)
 
 cursor.execute('''create table if not exists hotel_mng_sys
@@ -573,7 +573,7 @@ def ok_delete():
     else:
         messagebox.showwarning('No Record Deleted','You have to fill any one of the details to delete a record',parent=root3)
 
-photo = Image.open('Hotel Mng pic.png')
+photo = Image.open(r'Hotel Management System\assets\Hotel Mng pic.png')
 
 my_img = photo.resize((1400,800))
 pic = ImageTk.PhotoImage(my_img)

@@ -12,7 +12,7 @@ root.geometry('1200x620')
 root.title('Contact Manager')
 
 # CREATING AND CONNECTING TO THE DATABASE 
-conn = sqlite3.connect("Contacts_Mng.db")
+conn = sqlite3.connect(r"Contacts Manager\data\Contacts_Mng.db")
 cursor = conn.cursor()
 
 # CREATING THE TABLE ‘CONTACTS’
@@ -634,7 +634,7 @@ def view_all():
         Class_Instance.Contacts_Treeview(frame1,'none',CONTACTS)
 
 # OPENING AND RESIZING THE IMAGE THAT HAS BEEN PUT UP ON THE STARTING SCREEN
-img = Image.open('CS Project PNG File.png')
+img = Image.open(r'Contacts Manager\assets\Contact_manager_icon.png')
 img_size = img.resize((1200,640))
 photo = ImageTk.PhotoImage(img_size)
 

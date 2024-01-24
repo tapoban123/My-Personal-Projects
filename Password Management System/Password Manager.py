@@ -14,7 +14,7 @@ import time
 mainscreen = Tk()
 mainscreen.geometry('600x600')
 
-mycon = sqlite3.connect('Password_Manager_DB.db')
+mycon = sqlite3.connect(r'Password Management System\data\Password_Manager_DB.db')
 cur = mycon.cursor()
 
 cur.execute(
